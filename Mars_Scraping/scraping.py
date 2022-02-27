@@ -103,29 +103,18 @@ def mars_facts():
 def hemisphere(browser):
     url='https://marshemispheres.com/'
     browser.visit(url)
-
-
+    
     hemisphere_image_urls = []
-
-    imgs_links= browser.find_by_css("a.product-item h3")
-
-    for x in range(len(imgs_links)):
-        hemisphere={}
-
-        # Find elements going to click link 
-        browser.find_by_css("a.product-item h3")[x].click()
-
-        # Find sample Image link
-        sample_img= browser.find_link_by_text("Sample").first
-        hemisphere['img_url']=sample_img['href']
-
-        # Get hemisphere Title
-        hemisphere['title']=browser.find_by_css("h2.title").text
-
-        #Add Objects to hemisphere_img_urls list
-        hemisphere_image_urls.append(hemisphere)
-
-        # Go Back
+    for hemis in range(4):
+        browser.links.find_by_partial_text('Hemisphere')[hemis].click()
+        html = browser.html
+        hemi_soup = soup(html, 'html.parser')
+        title = hemi_soup.find('h2', class_='title').text
+        img_url = hemi_soup.find('li').a.get('href')
+        hemispheres = {}
+        hemispheres['img_url'] = f'https://marshemispheres.com/{img_url}'
+        hemispheres['title'] = title
+        hemisphere_image_urls.append(hemispheres)
         browser.back()
     return hemisphere_image_urls
 

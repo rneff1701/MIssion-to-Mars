@@ -1,3 +1,3 @@
 # Mission-to-Mars
 
-## Splinter, Beautiful Soup, MongoDB, and Flask created a website to scrape information about Mars from other websites.  Then create a custom web app to display the information and images.
+### Using Splinter, Beautiful Soup, MongoDB, and Flask created a website to scrape information and images about Mars from other websites and display the information and images on a new web page.
